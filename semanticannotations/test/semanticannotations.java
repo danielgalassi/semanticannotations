@@ -64,9 +64,9 @@ public class semanticannotations {
 	}
 
 	public static void main(String[] args) {
-		System.out.println("Dublin Core example");
+		System.out.println("Dublin Core example:");
 		dcm1();
-		System.out.println("Annnotea example");
+		System.out.println("\n\nAnnnotea example:");
 		annotea1();
 	}
 }
