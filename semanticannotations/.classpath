@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path=""/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="/media/disk/semanticWeb/Jena/lib/arq.jar"/>
+	<classpathentry kind="lib" path="/media/disk/semanticWeb/Jena/lib/arq-extra.jar"/>
+	<classpathentry kind="lib" path="/media/disk/semanticWeb/Jena/lib/icu4j_3_4.jar"/>
+	<classpathentry kind="lib" path="/media/disk/semanticWeb/Jena/lib/iri.jar"/>
+	<classpathentry kind="lib" path="/media/disk/semanticWeb/Jena/lib/jena.jar" sourcepath="/media/disk/semanticWeb/Jena/src"/>
+	<classpathentry kind="lib" path="/media/disk/semanticWeb/Jena/lib/jenatest.jar"/>
+	<classpathentry kind="lib" path="/media/disk/semanticWeb/Jena/lib/json.jar"/>
+	<classpathentry kind="lib" path="/media/disk/semanticWeb/Jena/lib/junit-4.5.jar"/>
+	<classpathentry kind="lib" path="/media/disk/semanticWeb/Jena/lib/log4j-1.2.12.jar"/>
+	<classpathentry kind="lib" path="/media/disk/semanticWeb/Jena/lib/lucene-core-2.3.1.jar"/>
+	<classpathentry kind="lib" path="/media/disk/semanticWeb/Jena/lib/slf4j-api-1.5.6.jar"/>
+	<classpathentry kind="lib" path="/media/disk/semanticWeb/Jena/lib/slf4j-log4j12-1.5.6.jar"/>
+	<classpathentry kind="lib" path="/media/disk/semanticWeb/Jena/lib/stax-api-1.0.jar"/>
+	<classpathentry kind="lib" path="/media/disk/semanticWeb/Jena/lib/wstx-asl-3.0.0.jar"/>
+	<classpathentry kind="lib" path="/media/disk/semanticWeb/Jena/lib/xercesImpl.jar"/>
+	<classpathentry kind="output" path=""/>
+</classpath>
