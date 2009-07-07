@@ -16,6 +16,7 @@ import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.rdf.model.ResIterator;
 import com.hp.hpl.jena.rdf.model.Resource;
+import com.hp.hpl.jena.rdf.model.StmtIterator;
 import com.hp.hpl.jena.util.FileManager;
 
 public class semanticannotations {
@@ -29,15 +30,18 @@ public class semanticannotations {
 		}
 		//read the RDF/XML file
 		dcm.read(in, null);
-		/*StmtIterator iter = dcm.listStatements();
-		while (iter.hasNext()) {
-			System.out.println(iter.nextStatement().getPredicate());
-			//break;
-		}*/
-		//dcm.write(System.out);
+
+		System.out.println("\n\n");
+		StmtIterator iter = dcm.listStatements();
+		while (iter.hasNext())
+			System.out.println(iter.nextStatement());
+
+		System.out.println("\n\n");
 		ResIterator ri = dcm.listSubjects();
 		while(ri.hasNext())
 			System.out.println(ri.nextResource());
+
+		//dcm.write(System.out);
 	}
 	
 	/*
