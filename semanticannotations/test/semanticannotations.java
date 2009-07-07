@@ -9,12 +9,36 @@ http://dublincore.org/schemas/rdfs/
 http://dublincore.org/documents/dc-rdf/
 
 */
+import java.io.InputStream;
+
 import com.hp.hpl.jena.rdf.arp.lang.Iso639;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
+import com.hp.hpl.jena.rdf.model.ResIterator;
 import com.hp.hpl.jena.rdf.model.Resource;
+import com.hp.hpl.jena.util.FileManager;
 
 public class semanticannotations {
+	
+	private static void dcm2() {
+		Model dcm = ModelFactory.createDefaultModel();
+		InputStream in = FileManager.get().open("dcelements.rdf");
+		if (in == null) {
+			System.out.println("File Not Found");
+			return;
+		}
+		//read the RDF/XML file
+		dcm.read(in, null);
+		/*StmtIterator iter = dcm.listStatements();
+		while (iter.hasNext()) {
+			System.out.println(iter.nextStatement().getPredicate());
+			//break;
+		}*/
+		//dcm.write(System.out);
+		ResIterator ri = dcm.listSubjects();
+		while(ri.hasNext())
+			System.out.println(ri.nextResource());
+	}
 	
 	/*
 	<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
@@ -44,7 +68,6 @@ public class semanticannotations {
 
 	private static void annotea1() {
 		Model ant = ModelFactory.createDefaultModel();
-		//ant.setNsPrefix("annotea", "http://www.w3.org/2000/10/annotation-ns");
 		
 		Resource r = ant.createResource("http://amazon.com/RDF Primer");
 		
@@ -66,7 +89,9 @@ public class semanticannotations {
 	public static void main(String[] args) {
 		System.out.println("Dublin Core example:");
 		dcm1();
-		System.out.println("\n\nAnnnotea example:");
+		System.out.println("\nAnnnotea example:");
 		annotea1();
+		System.out.println("\nDublin Core element set:");
+		dcm2();
 	}
 }
