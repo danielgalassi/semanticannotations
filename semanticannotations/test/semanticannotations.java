@@ -16,6 +16,7 @@ import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.rdf.model.ResIterator;
 import com.hp.hpl.jena.rdf.model.Resource;
+import com.hp.hpl.jena.rdf.model.Statement;
 import com.hp.hpl.jena.rdf.model.StmtIterator;
 import com.hp.hpl.jena.util.FileManager;
 
@@ -38,8 +39,27 @@ public class semanticannotations {
 
 		System.out.println("\n\n");
 		ResIterator ri = dcm.listSubjects();
-		while(ri.hasNext())
-			System.out.println(ri.nextResource());
+		while (ri.hasNext())
+			System.out.println("Resource: " + ri.nextResource());
+
+		System.out.println("\n\nskos:notes");
+		iter = dcm.listStatements();
+		Statement st = null;
+		String st2 = null;
+		while (iter.hasNext()) {
+			st = iter.nextStatement();
+			try {
+			st2 = st.getLiteral().toString();
+			} catch (Exception e) {
+				System.out.println(st.getSubject() + "doesn't have a sknos note.");
+				st2 = "";
+			}
+			if (st != null) {
+				System.out.println(st.getSubject());
+				System.out.println(st2);
+			}
+		}
+			//System.out.println(iter.nextStatement().getProperty(dcm.createProperty("skos:note")));
 
 		//dcm.write(System.out);
 	}
