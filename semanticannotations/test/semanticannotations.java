@@ -24,6 +24,7 @@ public class semanticannotations {
 	
 	private static void dcm2() {
 		Model dcm = ModelFactory.createDefaultModel();
+		
 		InputStream in = FileManager.get().open("dcelements.rdf");
 		if (in == null) {
 			System.out.println("File Not Found");
@@ -45,22 +46,17 @@ public class semanticannotations {
 		System.out.println("\n\nskos:notes");
 		iter = dcm.listStatements();
 		Statement st = null;
-		String st2 = null;
+		int i = 0;
 		while (iter.hasNext()) {
 			st = iter.nextStatement();
-			try {
-			st2 = st.getLiteral().toString();
-			} catch (Exception e) {
-				System.out.println(st.getSubject() + "doesn't have a sknos note.");
-				st2 = "";
-			}
-			if (st != null) {
-				System.out.println(st.getSubject());
-				System.out.println(st2);
-			}
+			System.out.println(i++ + "	" + st.toString());
+			if (st.getPredicate().equals(dcm.createProperty("http://www.w3.org/2004/02/skos/core#", "note")))
+				System.out.println("skos:note = " + st.getObject());
+			if (st.getPredicate().equals(dcm.createProperty("http://purl.org/dc/terms/", "description")))
+				System.out.println("dcterms:description = " + st.getObject());
 		}
-			//System.out.println(iter.nextStatement().getProperty(dcm.createProperty("skos:note")));
 
+		System.out.println("\n\n");
 		//dcm.write(System.out);
 	}
 	
