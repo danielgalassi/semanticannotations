@@ -14,6 +14,7 @@ import java.io.InputStream;
 import com.hp.hpl.jena.rdf.arp.lang.Iso639;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
+import com.hp.hpl.jena.rdf.model.Property;
 import com.hp.hpl.jena.rdf.model.ResIterator;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.Statement;
@@ -50,9 +51,9 @@ public class semanticannotations {
 		while (iter.hasNext()) {
 			st = iter.nextStatement();
 			System.out.println(i++ + "	" + st.toString());
-			if (st.getPredicate().equals(dcm.createProperty("http://www.w3.org/2004/02/skos/core#", "note")))
+			if (st.getPredicate().equals(dcm.createProperty(dcm.getNsPrefixURI("skos"), "note")))
 				System.out.println("skos:note = " + st.getObject());
-			if (st.getPredicate().equals(dcm.createProperty("http://purl.org/dc/terms/", "description")))
+			if (st.getPredicate().equals(dcm.createProperty(dcm.getNsPrefixURI("dcterms"), "description")))
 				System.out.println("dcterms:description = " + st.getObject());
 		}
 
@@ -86,6 +87,18 @@ public class semanticannotations {
 		dcm.write(System.out);
 	}
 
+	private static void model1() {
+		Model m = ModelFactory.createDefaultModel();
+		m.setNsPrefix("test", "http://my.example.com/");
+		
+		Property p = m.createProperty(m.getNsPrefixURI("test"), "myToken");
+		
+		System.out.println(p);
+		
+		p = null;
+		m = null;
+	}
+	
 	private static void annotea1() {
 		Model ant = ModelFactory.createDefaultModel();
 		
@@ -113,5 +126,7 @@ public class semanticannotations {
 		annotea1();
 		System.out.println("\nDublin Core element set:");
 		dcm2();
+		System.out.println("\nModel X:");
+		model1();
 	}
 }
