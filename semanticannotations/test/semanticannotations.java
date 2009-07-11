@@ -33,26 +33,26 @@ public class semanticannotations {
 		InputStream in = FileManager.get().open("dcterms.rdf");
 
 		dcom.read(in, null);
-		
+
 		StmtIterator si = dcom.listStatements();
 		while (si.hasNext()) {
 			System.out.println("-------------------------Begins here!--------------\n" + 
 								si.nextStatement() +
 								"\n------------------------- Ends here! --------------");
 		}
-		
+
 		ExtendedIterator <OntProperty> op = dcom.listOntProperties();
 		while (op.hasNext()) {
 			System.out.println("-------------------------Begins here!--------------\n" + 
 					op.next() + 
 					"\n------------------------- Ends here! --------------");
 		}
-		
+
 		Statement s2 = dcom.getProperty(dcom.getResource("http://purl.org/dc/terms/source"),
 						dcom.createProperty(dcom.getNsPrefixURI("skos"), "note"));
 		System.out.println("S2 = " + s2.asTriple().getObject().getLiteralValue());
 	}
-	
+
 	private static void dcom1() {
 		OntModel dcom = ModelFactory.createOntologyModel( OntModelSpec.RDFS_MEM);
 
@@ -81,7 +81,7 @@ public class semanticannotations {
 			if (s1 != null)
 				System.out.println("\tskos:note = " + s1);
 			System.out.println("\tskos:note2= " + or);
-			
+
 		}
 		//dcom.write(System.out);
 	}
