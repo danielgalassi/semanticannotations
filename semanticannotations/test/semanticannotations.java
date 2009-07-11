@@ -11,7 +11,6 @@ http://dublincore.org/documents/dc-rdf/
  */
 import java.io.InputStream;
 
-import com.hp.hpl.jena.graph.Node;
 import com.hp.hpl.jena.ontology.OntModel;
 import com.hp.hpl.jena.ontology.OntModelSpec;
 import com.hp.hpl.jena.ontology.OntProperty;
