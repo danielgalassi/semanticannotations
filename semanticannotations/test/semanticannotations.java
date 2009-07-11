@@ -36,11 +36,20 @@ public class semanticannotations {
 		dcom.read(in, null);
 		
 		ExtendedIterator <OntProperty> p = dcom.listOntProperties();
+		Statement s1 = null;
 		OntProperty op = null;
 		while (p.hasNext()) {
 			op = p.next();
-			System.out.print("\n" + op + "\n" + op.getComment("en"));
-
+			System.out.println(op);
+			
+			//System.out.println("\trdfs:comment = " + op.getComment("en"));
+			System.out.println("\trdfs:comment = " + op.getProperty(
+							dcom.createProperty(dcom.getNsPrefixURI("rdfs"), "comment")));
+			
+			s1 = op.getProperty(dcom.createProperty(dcom.getNsPrefixURI("skos"), "note"));
+			if (s1 != null)
+				System.out.println("\tskos:note = " + s1.getObject());
+			s1 = null;
 		}
 		//dcom.write(System.out);
 	}
