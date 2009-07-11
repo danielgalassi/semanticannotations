@@ -27,6 +27,27 @@ import com.hp.hpl.jena.util.iterator.ExtendedIterator;
 
 public class semanticannotations {
 
+	private static void example1() {
+		Model m = ModelFactory.createDefaultModel();
+		InputStream in = FileManager.get().open("example.rdf");
+		m.read(in, null);
+		
+		ResIterator rs = m.listResourcesWithProperty(m.createProperty("http://purl.org/dc/terms/title"));
+		Resource r = null;
+		StmtIterator si = null;
+		Statement s = null;
+		while (rs.hasNext()) {
+			r = rs.nextResource();
+			System.out.println("Resource: " + r);
+			si = r.listProperties();
+			while (si.hasNext()) {
+				s = si.next();
+				System.out.println("Statement: " + s);
+				System.out.println(s.getLanguage());
+			}
+		}
+	}
+
 	private static void dcom2() {
 		OntModel dcom = ModelFactory.createOntologyModel( OntModelSpec.RDFS_MEM);
 
@@ -35,22 +56,28 @@ public class semanticannotations {
 		dcom.read(in, null);
 
 		StmtIterator si = dcom.listStatements();
+		Statement s = null;
 		while (si.hasNext()) {
-			System.out.println("-------------------------Begins here!--------------\n" + 
-								si.nextStatement() +
-								"\n------------------------- Ends here! --------------");
+			s = si.nextStatement();
+			/*System.out.println("-------------------------Begins here!--------------\n" + 
+								s + "\n------------------------- Ends here! --------------");
+								*/
 		}
 
 		ExtendedIterator <OntProperty> op = dcom.listOntProperties();
+		OntProperty op1 = null;
 		while (op.hasNext()) {
-			System.out.println("-------------------------Begins here!--------------\n" + 
-					op.next() + 
-					"\n------------------------- Ends here! --------------");
+			op1 = op.next();
+			/*System.out.println("-------------------------Begins here!--------------\n" + 
+					op1 + "\n------------------------- Ends here! --------------");
+					*/
 		}
 
 		Statement s2 = dcom.getProperty(dcom.getResource("http://purl.org/dc/terms/source"),
 						dcom.createProperty(dcom.getNsPrefixURI("skos"), "note"));
 		System.out.println("S2 = " + s2.asTriple().getObject().getLiteralValue());
+		if (s2.getLanguage().equals("en-US"))
+			System.out.println(s2.getProperty(dcom.createProperty("xml:lang")));
 	}
 
 	private static void dcom1() {
@@ -183,6 +210,7 @@ public class semanticannotations {
 	}
 
 	public static void main(String[] args) {
+		/*
 		System.out.println("Dublin Core example:");
 		dcm1();
 		System.out.println("\nAnnnotea example:");
@@ -192,7 +220,10 @@ public class semanticannotations {
 		System.out.println("\nModel X:");
 		model1();
 		System.out.println("\nDublin Core Ontology example:");
-		//dcom1();
+		dcom1();
+		*/
 		dcom2();
+		System.out.println("Example RDF:");
+		example1();
 	}
 }
