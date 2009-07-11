@@ -11,17 +11,39 @@ http://dublincore.org/documents/dc-rdf/
 */
 import java.io.InputStream;
 
+import com.hp.hpl.jena.ontology.OntModel;
+import com.hp.hpl.jena.ontology.OntModelSpec;
+import com.hp.hpl.jena.ontology.OntProperty;
 import com.hp.hpl.jena.rdf.arp.lang.Iso639;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.rdf.model.Property;
+import com.hp.hpl.jena.rdf.model.RSIterator;
 import com.hp.hpl.jena.rdf.model.ResIterator;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.Statement;
 import com.hp.hpl.jena.rdf.model.StmtIterator;
 import com.hp.hpl.jena.util.FileManager;
+import com.hp.hpl.jena.util.iterator.ExtendedIterator;
 
 public class semanticannotations {
+	
+	private static void dcom1() {
+		OntModel dcom = ModelFactory.createOntologyModel( OntModelSpec.RDFS_MEM);
+		
+		InputStream in = FileManager.get().open("dcterms.rdf");
+		
+		dcom.read(in, null);
+		
+		ExtendedIterator <OntProperty> p = dcom.listOntProperties();
+		OntProperty op = null;
+		while (p.hasNext()) {
+			op = p.next();
+			System.out.print("\n" + op + "\n" + op.getComment("en"));
+
+		}
+		//dcom.write(System.out);
+	}
 	
 	private static void dcm2() {
 		Model dcm = ModelFactory.createDefaultModel();
@@ -128,5 +150,7 @@ public class semanticannotations {
 		dcm2();
 		System.out.println("\nModel X:");
 		model1();
+		System.out.println("\nDublin Core Ontology example:");
+		dcom1();
 	}
 }
