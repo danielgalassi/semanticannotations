@@ -17,7 +17,9 @@ import com.hp.hpl.jena.ontology.OntProperty;
 import com.hp.hpl.jena.rdf.arp.lang.Iso639;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
+import com.hp.hpl.jena.rdf.model.NodeIterator;
 import com.hp.hpl.jena.rdf.model.Property;
+import com.hp.hpl.jena.rdf.model.RDFNode;
 import com.hp.hpl.jena.rdf.model.ResIterator;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.Statement;
@@ -46,6 +48,17 @@ public class semanticannotations {
 				System.out.println(s.getLanguage());
 			}
 		}
+		
+		Resource source = m.getResource("http://example.org/123");//("http://purl.org/dc/terms/title");
+		NodeIterator ni = m.listObjectsOfProperty(source, m.createProperty("http://purl.org/dc/terms/title"));
+		RDFNode n = null;
+	    if (ni != null)
+	    	while (ni.hasNext()) {
+	    		n = ni.nextNode();
+	    		if (n.asNode().getLiteralLanguage().equals("es"))
+	    			//System.out.println(n.asNode().getLiteralValue());
+	    			System.out.println(n.asNode().getLiteralLexicalForm());
+	    	}
 	}
 
 	private static void dcom2() {
@@ -73,11 +86,12 @@ public class semanticannotations {
 					*/
 		}
 
-		Statement s2 = dcom.getProperty(dcom.getResource("http://purl.org/dc/terms/source"),
+/*		Statement s2 = dcom.getProperty(dcom.getResource("http://purl.org/dc/terms/source"),
 						dcom.createProperty(dcom.getNsPrefixURI("skos"), "note"));
 		System.out.println("S2 = " + s2.asTriple().getObject().getLiteralValue());
 		if (s2.getLanguage().equals("en-US"))
 			System.out.println(s2.getProperty(dcom.createProperty("xml:lang")));
+			*/
 	}
 
 	private static void dcom1() {
@@ -221,8 +235,8 @@ public class semanticannotations {
 		model1();
 		System.out.println("\nDublin Core Ontology example:");
 		dcom1();
-		*/
 		dcom2();
+		*/
 		System.out.println("Example RDF:");
 		example1();
 	}
