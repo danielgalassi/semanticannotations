@@ -11,6 +11,7 @@ http://dublincore.org/documents/dc-rdf/
  */
 import java.io.InputStream;
 
+import com.hp.hpl.jena.graph.Node;
 import com.hp.hpl.jena.ontology.OntModel;
 import com.hp.hpl.jena.ontology.OntModelSpec;
 import com.hp.hpl.jena.ontology.OntProperty;
@@ -57,7 +58,7 @@ public class semanticannotations {
 	    		n = ni.nextNode();
 	    		if (n.asNode().getLiteralLanguage().equals("es"))
 	    			//System.out.println(n.asNode().getLiteralValue());
-	    			System.out.println(n.asNode().getLiteralLexicalForm());
+	    			System.out.println("Titulo en español: " + n.asNode().getLiteralLexicalForm());
 	    	}
 	}
 
@@ -68,30 +69,22 @@ public class semanticannotations {
 
 		dcom.read(in, null);
 
-		StmtIterator si = dcom.listStatements();
-		Statement s = null;
-		while (si.hasNext()) {
-			s = si.nextStatement();
-			/*System.out.println("-------------------------Begins here!--------------\n" + 
-								s + "\n------------------------- Ends here! --------------");
-								*/
+		ResIterator ri = dcom.listResourcesWithProperty(dcom.createProperty("http://www.w3.org/2000/01/rdf-schema#comment"));
+		Resource r = null;
+		NodeIterator ni = null;
+		RDFNode n = null;
+		
+		while (ri.hasNext()) {
+			r = ri.nextResource();
+			System.out.println(r);
+			ni = dcom.listObjectsOfProperty(r, dcom.createProperty("http://www.w3.org/2000/01/rdf-schema#comment"));
+		    	while (ni.hasNext()) {
+		    		n = ni.nextNode();
+		    		if (n.asNode().getLiteralLanguage().equals("en-US"))
+		    			//System.out.println(n.asNode().getLiteralValue());
+		    			System.out.println("RDFS Comment: " + n.asNode().getLiteralLexicalForm());
+		    	}
 		}
-
-		ExtendedIterator <OntProperty> op = dcom.listOntProperties();
-		OntProperty op1 = null;
-		while (op.hasNext()) {
-			op1 = op.next();
-			/*System.out.println("-------------------------Begins here!--------------\n" + 
-					op1 + "\n------------------------- Ends here! --------------");
-					*/
-		}
-
-/*		Statement s2 = dcom.getProperty(dcom.getResource("http://purl.org/dc/terms/source"),
-						dcom.createProperty(dcom.getNsPrefixURI("skos"), "note"));
-		System.out.println("S2 = " + s2.asTriple().getObject().getLiteralValue());
-		if (s2.getLanguage().equals("en-US"))
-			System.out.println(s2.getProperty(dcom.createProperty("xml:lang")));
-			*/
 	}
 
 	private static void dcom1() {
@@ -235,9 +228,10 @@ public class semanticannotations {
 		model1();
 		System.out.println("\nDublin Core Ontology example:");
 		dcom1();
-		dcom2();
 		*/
-		System.out.println("Example RDF:");
-		example1();
+		dcom2();
+
+		//System.out.println("Example RDF:");
+		//example1();
 	}
 }
