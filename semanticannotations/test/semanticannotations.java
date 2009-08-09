@@ -7,8 +7,8 @@ http://dublincore.org/documents/dcmi-terms/
 http://dublincore.org/documents/dces/
 http://dublincore.org/schemas/rdfs/
 http://dublincore.org/documents/dc-rdf/
+*/
 
- */
 import java.io.InputStream;
 
 import com.hp.hpl.jena.ontology.OntModel;
@@ -26,8 +26,99 @@ import com.hp.hpl.jena.rdf.model.Statement;
 import com.hp.hpl.jena.rdf.model.StmtIterator;
 import com.hp.hpl.jena.util.FileManager;
 import com.hp.hpl.jena.util.iterator.ExtendedIterator;
+import com.hp.hpl.jena.util.iterator.Filter;
 
 public class semanticannotations {
+
+	public static void getCommentsForContributor() {
+		/*
+		<rdf:Description rdf:about="http://purl.org/dc/terms/contributor">
+		<rdfs:label xml:lang="en-US">Contributor</rdfs:label>
+		<rdfs:comment xml:lang="en-US">An entity responsible for making contributions to the resource.</rdfs:comment>
+		<dcterms:description xml:lang="en-US">Examples of a Contributor include a person, an organization, or a service. Typically, the name of a Contributor should be used to indicate the entity.</dcterms:description>
+		<rdfs:isDefinedBy rdf:resource="http://purl.org/dc/terms/"/>
+		<dcterms:issued>2008-01-14</dcterms:issued>
+		<dcterms:modified>2008-01-14</dcterms:modified>
+		<rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+		<dcterms:hasVersion rdf:resource="http://dublincore.org/usage/terms/history/#contributorT-001"/>
+		<rdfs:range rdf:resource="http://purl.org/dc/terms/Agent"/>
+		<rdfs:subPropertyOf rdf:resource="http://purl.org/dc/elements/1.1/contributor"/>
+		</rdf:Description>
+		*/
+		final String ns = "http://purl.org/dc/terms/";
+		final String co = "contributor";
+		String propNs = "http://www.w3.org/2000/01/rdf-schema#";
+		String propNm = "comment";
+		
+		//opening an ontology model
+		final OntModel m = ModelFactory.createOntologyModel(OntModelSpec.RDFS_MEM);
+		InputStream in = FileManager.get().open("dcterms.rdf");
+		m.read(in, null);
+		Property p = m.createProperty(propNs+propNm);
+		
+		ExtendedIterator ri = m.listResourcesWithProperty(p)
+							.filterKeep(new Filter<Resource>() {
+								@Override
+								public boolean accept(Resource o)
+								{return ((Resource)o).toString().equals("http://purl.org/dc/terms/contributor");
+										/*m.createProperty("http://www.w3.org/2000/01/rdf-schema#about"),
+										ns+co
+										);*/}
+						});
+		Resource r = null;
+		if (ri.hasNext())
+			while (ri.hasNext()) {
+				r = (Resource)ri.next();
+				//r = ri.next();
+				System.out.println(r.getProperty(p));
+				System.out.println(r.listProperties(p).next().getLiteral().getLexicalForm());
+			}
+		else
+			System.out.println("No Resources Available");
+		
+		propNs = null;
+		propNm = null;
+	}
+
+	public static void getTooltips(String filename, final String ns, final String property) {
+		final OntModel m = ModelFactory.createOntologyModel( OntModelSpec.RDFS_MEM);
+		InputStream in = FileManager.get().open(filename);
+		m.read(in, null);
+		
+		ExtendedIterator ri = m.listResourcesWithProperty(m.createProperty("http://www.w3.org/2000/01/rdf-schema#comment"))
+			.filterKeep(new Filter <Resource> () {
+							@Override
+							public boolean accept(Resource o) {
+								return ((Resource)o).hasProperty(m.createProperty(ns + property), "");
+							}});
+		/*
+		new Filter() {
+			public boolean accept(Object o)
+				{return ((Resource)o).hasProperty(RDF.type, "swrl#Imp");}
+		}
+		*/
+		
+		System.out.println(ri.hasNext());
+		/*
+		Resource r = null;
+		NodeIterator ni = null;
+		RDFNode n = null;
+
+		Filter <Resource> f = null;
+		
+		while (ri.hasNext()) {
+			r = ri.nextResource();
+			System.out.println(r);
+			ni = m.listObjectsOfProperty(r, m.createProperty(ns + property));
+		    	while (ni.hasNext()) {
+		    		n = ni.nextNode();
+		    		if (n.asNode().getLiteralLanguage().equals("en-US"))
+		    			//System.out.println(n.asNode().getLiteralValue());
+		    			System.out.println("RDFS Comment: " + n.asNode().getLiteralLexicalForm());
+		    	}
+		}*/
+		
+	}
 
 	private static void example1() {
 		Model m = ModelFactory.createDefaultModel();
@@ -228,10 +319,14 @@ public class semanticannotations {
 		System.out.println("\nDublin Core Ontology example:");
 		dcom1();
 		*/
-		dcom2();
+		
+		//dcom2();
 
 		//System.out.println("Example RDF:");
 		//example1();
 		Iso639 a = null;
+		//getTooltips("dcterms.rdf", "http://purl.org/dc/terms/", "type");
+		//getTooltips("dcterms.rdf", "http://www.w3.org/2000/01/rdf-schema#", "comment");
+		getCommentsForContributor();
 	}
 }
