@@ -1,8 +1,12 @@
-﻿<rdf:RDF
+<rdf:RDF
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-    xmlns:dcterms="http://purl.org/dc/terms/" > 
+    xmlns:dcterms="http://purl.org/dc/terms/" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance#"
+    > 
   <rdf:Description rdf:about="http://example.org/123">
     <dcterms:title xml:lang="es">Aprendiendo Biología</dcterms:title>
     <dcterms:title xml:lang="en">Learning Biology</dcterms:title>
+    <dcterms:title xsi:value="Learning Biology"/>
+    <dcterms:date xsi:type="dcterms:W3CDTF" rdf:value="2021-01-01"/>
   </rdf:Description>
 </rdf:RDF>
