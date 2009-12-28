@@ -120,6 +120,40 @@ public class semanticannotations {
 		
 	}
 
+	public static Model loadModelFromFile (String sFile) {
+		Model m = ModelFactory.createDefaultModel();
+		InputStream in = FileManager.get().open(sFile);
+		m.read(in, null);
+		return m;
+	}
+
+	public static void exampleA() {
+		Model m = loadModelFromFile("dcelements.rdf");
+
+		ResIterator rs = m.listSubjects();
+		StmtIterator si = null, si2 = null;
+		Statement s = null;
+		Resource r = null;
+		while (rs.hasNext()) {
+			r = rs.next();
+			System.out.println("\n" + r);
+			//si = r.listProperties();
+			si2 = r.listProperties(m.createProperty("http://purl.org/dc/terms/description"));
+			while (si2.hasNext())
+				System.out.println("   Description\t" + si2.next().getObject().asNode().getLiteralValue());
+			si2 = r.listProperties(m.createProperty("http://www.w3.org/2000/01/rdf-schema#label"));
+			while (si2.hasNext())
+				System.out.println("   Label\t" + si2.next().getObject().asNode().getLiteralValue());
+
+			/*while (si.hasNext()) {
+				s = si.next();
+				System.out.println("-->\t" +
+						s.getPredicate() + "\t" +
+						s.getObject());
+			}*/
+		}
+	}
+	
 	private static void example1() {
 		Model m = ModelFactory.createDefaultModel();
 		InputStream in = FileManager.get().open("example.rdf");
@@ -150,6 +184,8 @@ public class semanticannotations {
 	    			//System.out.println(n.asNode().getLiteralValue());
 	    			System.out.println("Titulo en español: " + n.asNode().getLiteralLexicalForm());
 	    	}
+	    
+	    m.write(System.out);
 	}
 
 	private static void dcom2() {
@@ -286,6 +322,111 @@ public class semanticannotations {
 		m = null;
 	}
 
+	public static void dcOthers() {
+		final Model mTerms = loadModelFromFile("dcterms.rdf");
+		StmtIterator siTerms = mTerms.listStatements();
+		ExtendedIterator <Statement> siT2 = siTerms.filterKeep(new Filter<Statement>() {
+			@Override
+			public boolean accept(Statement st)
+			{return (st.getPredicate().equals(mTerms.createProperty("http://www.w3.org/1999/02/22-rdf-syntax-ns#type")) &&
+					!(st.getObject().toString().equals("http://www.w3.org/2000/01/rdf-schema#Class") ||
+						st.getObject().toString().equals("http://www.w3.org/1999/02/22-rdf-syntax-ns#Property")));}
+			});
+		while (siT2.hasNext())
+			System.out.println(siT2.next().getSubject());
+		System.out.println();
+	}
+
+	public static void dcClasses() {
+		final Model mTerms = loadModelFromFile("dcterms.rdf");
+		StmtIterator siTerms = mTerms.listStatements();
+		ExtendedIterator <Statement> siT2 = siTerms.filterKeep(new Filter<Statement>() {
+			@Override
+			public boolean accept(Statement st)
+			{return (st.getPredicate().equals(mTerms.createProperty("http://www.w3.org/1999/02/22-rdf-syntax-ns#type")) &&
+					st.getObject().toString().equals("http://www.w3.org/2000/01/rdf-schema#Class"));}
+			});
+		while (siT2.hasNext())
+			System.out.println(siT2.next().getSubject());
+		System.out.println();
+	}
+
+	public static void dcSubPropertyOf(final String s) {
+		final Model mTerms = loadModelFromFile("dcterms.rdf");
+		StmtIterator siTerms = mTerms.listStatements();
+		ExtendedIterator <Statement> siT2 = siTerms.filterKeep(new Filter<Statement>() {
+			@Override
+			public boolean accept(Statement st)
+			{return (st.getPredicate().equals(mTerms.createProperty("http://www.w3.org/2000/01/rdf-schema#subPropertyOf"))
+					&& st.getObject().toString().equals(s)
+					);
+			}
+			});
+		while (siT2.hasNext())
+			System.out.println("\t" + siT2.next().getSubject());
+		System.out.println();
+	}
+	
+	public static void dcSKOS(final String sSubject) {
+		final Model dc = loadModelFromFile("dcelements.rdf");
+		StmtIterator si = dc.listStatements();
+		ExtendedIterator <Statement> si2 = si.filterKeep(new Filter<Statement>() {
+			@Override
+			public boolean accept(Statement st)
+			{return (st.getPredicate().equals(dc.createProperty("http://www.w3.org/2004/02/skos/core#note")) &&
+					st.getSubject().toString().equals(sSubject));
+			}
+			});
+		Statement s = null;
+		while (si2.hasNext()) {
+			s = si2.next();
+			System.out.println(s.getSubject() + "\n\t" + 
+					s.getObject().asNode().getLiteralValue() + "\n\t" + 
+					s.getObject().asNode().getLiteralLanguage());
+		}
+	}
+	
+	private static void dcBigPic() {
+		Model dcE = loadModelFromFile("dcelements.rdf");
+		Model dcT = loadModelFromFile("dcterms.rdf");
+		StmtIterator dcTerms = dcT.listStatements();
+		StmtIterator dcElem = dcE.listStatements();
+		Statement sTerm = null;
+
+		//ResIterator dcRes = dcT.listResourcesWithProperty(dcT.createProperty("http://www.w3.org/2000/01/rdf-schema#subPropertyOf"));
+		ResIterator dcRes = dcE.listSubjects();
+		Resource dcR = null;
+
+		/*
+		while (dcElem.hasNext())
+			System.out.println(dcElem.next());
+		while (dcTerms.hasNext()) {
+			sTerm = dcTerms.next();
+			System.out.println(sTerm);
+		}
+		*/
+
+		while (dcRes.hasNext()) {
+			dcR = dcRes.next();
+			System.out.println(dcR);
+			dcSubPropertyOf(dcR.toString());
+		}
+
+		System.out.println("DC Classes");
+		dcClasses();
+
+		System.out.println("DC Others");
+		dcOthers();
+
+		/*Statement s = null;
+		while (dcTerms.hasNext()) {
+			s = dcTerms.next();
+			System.out.println(s.getSubject() + "\t" + 
+								s.getPredicate() + "\t" +
+								s.getObject());
+		}*/
+	}
+
 	private static void annotea1() {
 		Model ant = ModelFactory.createDefaultModel();
 
@@ -299,34 +440,57 @@ public class semanticannotations {
 				"wonderful idea!",
 				Iso639.find("eng").twoCharCode);
 
+		Property p = ant.createProperty("http://www.w3.org/2000/10/annotation-ns#body");
+
 		r.addProperty(ant.createProperty("http://www.w3.org/2000/10/annotation-ns#body"),
 				"BUENA idea!",
 				Iso639.find("spa").twoCharCode);
+
+		r.addLiteral(ant.createProperty("http://www.w3.org/2000/10/annotation-ns#body"), 123.0);
 
 		ant.write(System.out);
 	}
 
 	public static void main(String[] args) {
+		System.out.println("\nAnnnotea example:");
+		annotea1();
 		/*
 		System.out.println("Dublin Core example:");
 		dcm1();
-		System.out.println("\nAnnnotea example:");
-		annotea1();
+		
 		System.out.println("\nDublin Core element set:");
 		dcm2();
+		
 		System.out.println("\nModel X:");
 		model1();
+		
 		System.out.println("\nDublin Core Ontology example:");
 		dcom1();
+		dcom2();
+		System.out.println("Example RDF:");
+		example1();
 		*/
-		
-		//dcom2();
-
-		//System.out.println("Example RDF:");
-		//example1();
 		Iso639 a = null;
-		//getTooltips("dcterms.rdf", "http://purl.org/dc/terms/", "type");
+		System.out.println("Found?\t" + a.find("es").name);
+		getTooltips("dcterms.rdf", "http://purl.org/dc/terms/", "type");
 		//getTooltips("dcterms.rdf", "http://www.w3.org/2000/01/rdf-schema#", "comment");
+		System.out.println("\nSubjects:");
+		exampleA();
+		System.out.println("\n");
 		getCommentsForContributor();
+		//dcBigPic();
+		
+		System.out.println("dc skos");
+		dcSKOS("http://purl.org/dc/elements/1.1/identifier");
+
+		Model m = loadModelFromFile("example.rdf");
+		StmtIterator si = m.listStatements();
+		Statement s = null;
+		while (si.hasNext()) {
+			s = si.next();
+			//if (s.getPredicate().toString().equals("http://purl.org/dc/terms/date"))
+				System.out.println(s + "\t" + s.getObject().isResource());
+		}
+		m.write(System.out);
 	}
 }
