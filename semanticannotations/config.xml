@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<fundamentals>
+		<RDFList type="annotations">
+			<RDF main="yes"></RDF>
+			<RDF main="no"></RDF>
+			<encodingScheme></encodingScheme>
+		</RDFlist>
+		<RDFList type="resources">
+			<RDF main="yes"></RDF>
+			<RDF main="no"></RDF>
+			<encondigScheme></encondigScheme>
+		</RDFlist>
+</fundamentals>
+
