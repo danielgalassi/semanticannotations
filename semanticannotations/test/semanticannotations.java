@@ -11,6 +11,8 @@ http://dublincore.org/documents/dc-rdf/
 
 import java.io.InputStream;
 
+import utils.RDFUtils;
+
 import com.hp.hpl.jena.ontology.OntModel;
 import com.hp.hpl.jena.ontology.OntModelSpec;
 import com.hp.hpl.jena.ontology.OntProperty;
@@ -483,14 +485,21 @@ public class semanticannotations {
 		System.out.println("dc skos");
 		dcSKOS("http://purl.org/dc/elements/1.1/identifier");
 
-		Model m = loadModelFromFile("example.rdf");
-		StmtIterator si = m.listStatements();
-		Statement s = null;
-		while (si.hasNext()) {
-			s = si.next();
-			//if (s.getPredicate().toString().equals("http://purl.org/dc/terms/date"))
-				System.out.println(s + "\t" + s.getObject().isResource());
-		}
-		m.write(System.out);
+		Model model = loadModelFromFile("example.rdf");
+		//m.write(System.out);
+		//MyResource mr = new MyResource();
+		String dcterms = "http://purl.org/dc/terms/";
+		String dctermsdate = dcterms + "date";
+		String xsi = "http://www.w3.org/2001/XMLSchema-instance#";
+		String xsitype = xsi + "type";
+		/*Model model = ModelFactory.createDefaultModel();
+		model.setNsPrefix("dcterms", dcterms);
+		model.setNsPrefix("xsi", xsi);*/
+		Model m2 = RDFUtils.addEncodedResource("http://example.org/123",
+												"http://purl.org/dc/terms/date",
+												"dcterms:W3CDTF",
+												"2222-1-1");
+		model.add(m2);
+		model.write(System.out);
 	}
 }
