@@ -4,6 +4,11 @@ import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.rdf.model.Resource;
 
+/***
+ * 
+ * @author daniel
+ *
+ */
 public class RDFUtils {
 
 	/**
@@ -19,7 +24,7 @@ public class RDFUtils {
 											String sEncoding,
 											String sValue) {
 		String sXSIns = "http://www.w3.org/2001/XMLSchema-instance#";
-		Model m = ModelFactory.createDefaultModel();
+		Model m = getNewModel();
 		Resource r1 = m.createResource(sResource);
 		Resource r2 = m.createResource()
 						.addProperty (m.createProperty(sXSIns + "value"),
@@ -40,9 +45,17 @@ public class RDFUtils {
 	public static Model addEncodedResource (String sResource,
 											String sProperty,
 											String sValue) {
-		Model m = ModelFactory.createDefaultModel();
+		Model m = getNewModel();
 		Resource r = m.createResource(sResource);
 		r.addProperty(m.createProperty(sProperty), sValue);
 		return m;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public static Model getNewModel () {
+		return ModelFactory.createDefaultModel();
 	}
 }

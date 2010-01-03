@@ -8,6 +8,8 @@ public class SemanticAnnotations {
 	
 	public static void loadMetadataDefinitions () {
 		rscFactory = new MyResourceFactory();
+		if (rscFactory.isRscFactoryReady())
+		System.out.println("Resource Factory ready!");
 	}
 	
 	public static void launchUI () {
