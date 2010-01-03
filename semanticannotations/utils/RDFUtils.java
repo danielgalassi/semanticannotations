@@ -1,8 +1,13 @@
 package utils;
 
+import java.io.InputStream;
+
+import com.hp.hpl.jena.ontology.OntModel;
+import com.hp.hpl.jena.ontology.OntModelSpec;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.rdf.model.Resource;
+import com.hp.hpl.jena.util.FileManager;
 
 /***
  * 
@@ -57,5 +62,12 @@ public class RDFUtils {
 	 */
 	public static Model getNewModel () {
 		return ModelFactory.createDefaultModel();
+	}
+	
+	public static OntModel loadOntModelFromFile (String sFile) {
+		OntModel om = ModelFactory.createOntologyModel(OntModelSpec.RDFS_MEM);
+		InputStream in = FileManager.get().open(sFile);
+		om.read(in, null);
+		return om;	
 	}
 }

@@ -2,6 +2,8 @@ package metadata;
 
 import org.w3c.dom.NodeList;
 
+import utils.RDFUtils;
+
 import com.hp.hpl.jena.ontology.OntModel;
 
 /***
@@ -31,7 +33,7 @@ public class MyOntology {
 	}
 	
 	private void loadOntModel (NodeList nlDefs) {
-		
+		RDFUtils.loadOntModelFromFile("x.rdf");
 	}
 	
 	/**
