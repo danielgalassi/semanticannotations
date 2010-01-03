@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <fundamentals>
 		<RDFList type="annotations">
-			<RDF main="yes"></RDF>
-			<RDF main="no"></RDF>
-			<encodingScheme></encodingScheme>
-		</RDFlist>
+			<RDFvoc main="yes">annotation-ns</RDFvoc>
+			<RDFvoc main="no">dcterms</RDFvoc>
+		</RDFList>
 		<RDFList type="resources">
-			<RDF main="yes"></RDF>
-			<RDF main="no"></RDF>
-			<encondigScheme></encondigScheme>
-		</RDFlist>
+			<RDFvoc main="yes">dcelements</RDFvoc>
+			<RDFvoc main="no">dcterms</RDFvoc>
+		</RDFList>
 </fundamentals>
-

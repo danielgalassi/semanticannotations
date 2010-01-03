@@ -14,16 +14,35 @@ public class RDFUtils {
 	 * @param sValue
 	 * @return
 	 */
-	public static Model addEncodedResource(String sResource,
-										String sProperty,
-										String sEncoding,
-										String sValue) {
+	public static Model addEncodedResource (String sResource,
+											String sProperty,
+											String sEncoding,
+											String sValue) {
+		String sXSIns = "http://www.w3.org/2001/XMLSchema-instance#";
 		Model m = ModelFactory.createDefaultModel();
 		Resource r1 = m.createResource(sResource);
 		Resource r2 = m.createResource()
-						.addProperty(m.createProperty("http://www.w3.org/2001/XMLSchema-instance#value"), sValue)
-						.addProperty(m.createProperty("http://www.w3.org/2001/XMLSchema-instance#type"), sEncoding);
+						.addProperty (m.createProperty(sXSIns + "value"),
+										sValue)
+						.addProperty (m.createProperty(sXSIns + "type"),
+										sEncoding);
 		r1.addProperty(m.createProperty(sProperty), r2);
+		return m;
+	}
+
+	/**
+	 * 
+	 * @param sResource
+	 * @param sProperty
+	 * @param sValue
+	 * @return
+	 */
+	public static Model addEncodedResource (String sResource,
+											String sProperty,
+											String sValue) {
+		Model m = ModelFactory.createDefaultModel();
+		Resource r = m.createResource(sResource);
+		r.addProperty(m.createProperty(sProperty), sValue);
 		return m;
 	}
 }

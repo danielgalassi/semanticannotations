@@ -30,7 +30,7 @@ import com.hp.hpl.jena.util.FileManager;
 import com.hp.hpl.jena.util.iterator.ExtendedIterator;
 import com.hp.hpl.jena.util.iterator.Filter;
 
-public class semanticannotations {
+public class Test {
 
 	public static void getCommentsForContributor() {
 		/*
@@ -453,7 +453,7 @@ public class semanticannotations {
 		ant.write(System.out);
 	}
 
-	public static void main(String[] args) {
+	public Test() {
 		System.out.println("\nAnnnotea example:");
 		annotea1();
 		/*
@@ -499,7 +499,11 @@ public class semanticannotations {
 												"http://purl.org/dc/terms/date",
 												"dcterms:W3CDTF",
 												"2222-1-1");
+		Model m3 = RDFUtils.addEncodedResource("http://example.org/123", 
+												"http://purl.org/dc/terms/description", 
+												"hello");
 		model.add(m2);
+		model.add(m3);
 		model.write(System.out);
 	}
 }
