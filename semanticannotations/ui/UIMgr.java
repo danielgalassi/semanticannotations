@@ -3,6 +3,9 @@
  */
 package ui;
 
+import java.util.Iterator;
+
+import metadata.MyOntology;
 import metadata.OntologyCatalog;
 
 /**
@@ -15,14 +18,16 @@ public class UIMgr {
 	
 	private void buildWelcomeFrame () {
 		//select ontology
-		for (int i=0; i<ontCatalog.getSize(); i++)
-			System.out.println(ontCatalog.getOntNames().get(i));
+		Iterator <String> itOntNames = ontCatalog.getOntNames();
+		while (itOntNames.hasNext())
+			System.out.println("Ontology available: " + itOntNames.next() );
 		//upon selection...
 		buildForm("Annotations");
 	}
 	
-	private void buildForm (String sChoice) {
-		
+	private void buildForm (String sOntSelected) {
+		MyOntology ontSelected = ontCatalog.getOntology(sOntSelected);
+		System.out.println("Ontology selected: " + ontSelected.getsOntName());
 	}
 	
 	private void setOntCatalog (OntologyCatalog ontCatalog) {
