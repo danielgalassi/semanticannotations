@@ -30,8 +30,10 @@ public class SemanticAnnotations {
 	 * @param args
 	 */
 	public static void main (String[] args) {
+		//startup
 		loadMetadataDefinitions();
 		launchUI();
+		//set objects to null
 		cleanup();
 	}
 }
