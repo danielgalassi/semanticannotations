@@ -1,5 +1,6 @@
 package semanticAnnotations;
 
+import ui.UIMgr;
 import metadata.OntologyCatalog;
 
 public class SemanticAnnotations {
@@ -16,7 +17,7 @@ public class SemanticAnnotations {
 	}
 	
 	public static void launchUI () {
-		
+		new UIMgr (ontCatalog);
 	}
 
 	/**

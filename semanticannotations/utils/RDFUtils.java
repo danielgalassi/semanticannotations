@@ -1,3 +1,6 @@
+/**
+ * code related to help / utility routines
+ */
 package utils;
 
 import java.io.InputStream;
