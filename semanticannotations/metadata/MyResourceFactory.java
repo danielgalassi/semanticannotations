@@ -40,16 +40,6 @@ public class MyResourceFactory {
 			}
 		}
 		bRscFactoryReady = true;
-		/*
-		sResAlias = nlCfg.item(i).getAttributes().getNamedItem("type").getNodeValue();
-		alRscs.add(new MyResource(sResAlias, nlCfg.item(i).getChildNodes()));
-		System.out.println("RDFVocs:");
-		for (int i=0; i<nlVoc.getLength(); i++) {
-			System.out.print("main?=" + nlVoc.item(i).getAttributes().getNamedItem("main").getNodeValue());
-			System.out.println("\t" + nlVoc.item(i).getParentNode().getAttributes().getNamedItem("type").getNodeValue() +
-								"\t" + nlVoc.item(i).getFirstChild().getNodeValue());
-			//System.out.println("\t" + nlVoc.item(i).getFirstChild().getNodeValue());
-		}*/
 	}
 
 	/**
