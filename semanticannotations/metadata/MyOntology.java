@@ -43,7 +43,7 @@ public class MyOntology {
 		String sOntFile;
 		Node nDef = null;
 		omModel = new ArrayList <OntModel> ();
-		System.out.println("Loading ontologies");
+		System.out.println("Loading definitions");
 		for (int i=0; i<nlDefs.getLength(); i++) {
 			nDef = nlDefs.item(i);
 			if (nDef.getNodeName().equals("RDFvoc")) {
