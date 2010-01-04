@@ -12,7 +12,7 @@ public class SemanticAnnotations {
 	public static void loadMetadataDefinitions () {
 		ontCatalog = new OntologyCatalog ();
 		if (ontCatalog.isOntCatalogReady ())
-			System.out.println("Resource Factory ready!");
+			System.out.println("Ontology Catalog ready!");
 	}
 	
 	public static void launchUI () {
