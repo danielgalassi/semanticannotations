@@ -18,10 +18,10 @@ public class UIMgr {
 		for (int i=0; i<ontCatalog.getSize(); i++)
 			System.out.println(ontCatalog.getOntNames().get(i));
 		//upon selection...
-		buildForm();
+		buildForm("Annotations");
 	}
 	
-	private void buildForm () {
+	private void buildForm (String sChoice) {
 		
 	}
 	
