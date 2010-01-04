@@ -14,10 +14,10 @@ import utils.XMLUtils;
  * @author daniel
  *
  */
-public class MyResourceFactory {
+public class OntologyCatalog {
 
 	private ArrayList <MyOntology> alOntModels;
-	private boolean bRscFactoryReady = false;
+	private boolean bOntCatalogReady = false;
 	
 	/**
 	 * Loads all the ontologies specified in the config.xml file
@@ -39,21 +39,21 @@ public class MyResourceFactory {
 												nRsc.getChildNodes()));
 			}
 		}
-		bRscFactoryReady = true;
+		bOntCatalogReady = true;
 	}
 
 	/**
-	 * Provides the state of the Resource Factory
-	 * @return the bRscFactoryReady
+	 * Provides the state of the Ontology Catalog
+	 * @return the bOntCatalogReady
 	 */
-	public boolean isRscFactoryReady() {
-		return bRscFactoryReady;
+	public boolean isOntCatalogReady () {
+		return bOntCatalogReady;
 	}
 
 	/**
 	 * 
 	 */
-	public MyResourceFactory () {
+	public OntologyCatalog () {
 		loadModels();
 	}
 }

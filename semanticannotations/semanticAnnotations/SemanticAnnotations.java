@@ -1,17 +1,17 @@
 package semanticAnnotations;
 
-import metadata.MyResourceFactory;
+import metadata.OntologyCatalog;
 
 public class SemanticAnnotations {
 
-	private static MyResourceFactory rscFactory;
+	private static OntologyCatalog ontCatalog;
 	
 	/**
-	 * Invokes the Resource Factory loader
+	 * Invokes the Ontology Catalog loader
 	 */
 	public static void loadMetadataDefinitions () {
-		rscFactory = new MyResourceFactory();
-		if (rscFactory.isRscFactoryReady())
+		ontCatalog = new OntologyCatalog ();
+		if (ontCatalog.isOntCatalogReady ())
 			System.out.println("Resource Factory ready!");
 	}
 	
@@ -22,14 +22,14 @@ public class SemanticAnnotations {
 	/**
 	 * Cleanup method, setting objects to null before shutting down the system
 	 */
-	private static void cleanup() {
-		rscFactory = null;
+	private static void cleanup () {
+		ontCatalog = null;
 	}
 	
 	/**
 	 * @param args
 	 */
-	public static void main(String[] args) {
+	public static void main (String[] args) {
 		loadMetadataDefinitions();
 		launchUI();
 		cleanup();
