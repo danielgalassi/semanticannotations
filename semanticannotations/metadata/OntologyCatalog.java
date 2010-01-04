@@ -23,6 +23,10 @@ public class OntologyCatalog {
 	private int iSize;
 	private boolean bOntCatalogReady = false;
 	
+	public void getOntology (String sOntName) {
+		
+	}
+	
 	/**
 	 * Provides a list of ontology model names
 	 * @return OntModel names in an ArrayList
