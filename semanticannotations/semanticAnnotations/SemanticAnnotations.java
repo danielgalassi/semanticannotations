@@ -16,6 +16,9 @@ public class SemanticAnnotations {
 			System.out.println("Ontology Catalog ready!");
 	}
 	
+	/**
+	 * Prepares the user interface
+	 */
 	public static void launchUI () {
 		new UIMgr (ontCatalog);
 	}
