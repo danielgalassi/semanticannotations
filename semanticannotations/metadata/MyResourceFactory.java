@@ -20,7 +20,7 @@ public class MyResourceFactory {
 	private boolean bRscFactoryReady = false;
 	
 	/**
-	 * 
+	 * Loads all the ontologies specified in the config.xml file
 	 */
 	private void loadModels () {
 		Document fConfig = XMLUtils.File2Document(new File("config.xml"));
@@ -43,6 +43,7 @@ public class MyResourceFactory {
 	}
 
 	/**
+	 * Provides the state of the Resource Factory
 	 * @return the bRscFactoryReady
 	 */
 	public boolean isRscFactoryReady() {

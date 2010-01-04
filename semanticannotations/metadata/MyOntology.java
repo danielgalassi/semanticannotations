@@ -35,6 +35,10 @@ public class MyOntology {
 		this.sOntName = sOntName;
 	}
 	
+	/**
+	 * Loads all the ontologies
+	 * @param nlDefs config.xml node list
+	 */
 	private void loadOntModel (NodeList nlDefs) {
 		String sOntFile;
 		Node nDef = null;
@@ -44,7 +48,6 @@ public class MyOntology {
 			nDef = nlDefs.item(i);
 			if (nDef.getNodeName().equals("RDFvoc")) {
 				sOntFile = nDef.getChildNodes().item(0).getNodeValue();
-				System.out.println("\t" + sOntFile);
 				//adding new OntModel to the Ontologies catalog
 				omModel.add(RDFUtils.loadOntModelFromFile(sOntFile + ".rdf"));
 			}
