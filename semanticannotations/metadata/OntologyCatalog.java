@@ -24,7 +24,12 @@ public class OntologyCatalog {
 	private int iSize;
 	private boolean bOntCatalogReady = false;
 	
-	public MyOntology getOntology (String sOntName) {
+	/**
+	 * 
+	 * @param sOntName
+	 * @return
+	 */
+	public MyOntology getOntModels (String sOntName) {
 		return hmOntModels.get(sOntName);
 	}
 	
