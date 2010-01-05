@@ -21,7 +21,6 @@ import utils.XMLUtils;
 public class OntologyCatalog {
 
 	private HashMap <String, MyOntology> hmOntModels;
-	//private ArrayList <MyOntology> alOntModels;
 	private int iSize;
 	private boolean bOntCatalogReady = false;
 	
@@ -34,12 +33,6 @@ public class OntologyCatalog {
 	 * @return ontology names
 	 */
 	public Iterator <String> getOntNames () {
-		/*
-		ArrayList <String> alOntNames = new ArrayList <String> ();
-		for (int i=0; i<alOntModels.size(); i++)
-			alOntNames.add(alOntModels.get(i).getsOntName());
-		return alOntNames;
-		*/
 		return (hmOntModels.keySet().iterator());
 	}
 	
@@ -55,7 +48,6 @@ public class OntologyCatalog {
 		
 		if (iSize > 0) {
 			hmOntModels = new HashMap <String, MyOntology> ();
-			//alOntModels = new ArrayList <MyOntology> ();
 			System.out.println("Loading " + iSize + " top-level definitions");
 			for (int i=0; i < iSize; i++) {
 				nRsc = nlCfg.item(i);
@@ -65,12 +57,6 @@ public class OntologyCatalog {
 				hmOntModels.put	(sOntName, 
 								new MyOntology (sOntName, 
 												nRsc.getChildNodes()));
-				/*
-				alOntModels.add(new MyOntology(nRsc.getAttributes()
-													.getNamedItem("type")
-													.getNodeValue(),
-												nRsc.getChildNodes()));
-				*/
 			}
 		}
 		bOntCatalogReady = true;

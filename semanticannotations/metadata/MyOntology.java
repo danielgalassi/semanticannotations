@@ -1,6 +1,6 @@
 package metadata;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -17,8 +17,17 @@ import com.hp.hpl.jena.ontology.OntModel;
 public class MyOntology {
 
 	private String sOntName;
-	private ArrayList <OntModel> omModel;
+	private HashMap <String, OntModel> hmOntology;
 
+	/**
+	 * 
+	 * @param sOntAlias ontology key
+	 * @return an ontology
+	 */
+	public OntModel getOntology (String sOntAlias) {
+		return hmOntology.get(sOntAlias);
+	}
+	
 	/**
 	 * Getter method for MyOntology's alias
 	 * @return the ontology alias as a String
@@ -40,16 +49,21 @@ public class MyOntology {
 	 * @param nlDefs config.xml node list
 	 */
 	private void loadOntModel (NodeList nlDefs) {
+		String sOntAlias;
 		String sOntFile;
 		Node nDef = null;
-		omModel = new ArrayList <OntModel> ();
+		hmOntology = new HashMap <String, OntModel> ();
 		System.out.println("Loading definitions");
 		for (int i=0; i<nlDefs.getLength(); i++) {
 			nDef = nlDefs.item(i);
 			if (nDef.getNodeName().equals("RDFvoc")) {
 				sOntFile = nDef.getChildNodes().item(0).getNodeValue();
+				sOntAlias = nDef.getAttributes()
+								.getNamedItem("name")
+								.getNodeValue();
 				//adding new OntModel to the Ontologies catalog
-				omModel.add(RDFUtils.loadOntModelFromFile(sOntFile + ".rdf"));
+				hmOntology.put (sOntAlias,
+							RDFUtils.loadOntModelFromFile(sOntFile + ".rdf"));
 			}
 		}
 	}
