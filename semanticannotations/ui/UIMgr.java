@@ -26,7 +26,7 @@ public class UIMgr {
 	}
 	
 	private void buildForm (String sOntSelected) {
-		MyOntology ontSelected = ontCatalog.getOntology(sOntSelected);
+		MyOntology ontSelected = ontCatalog.getOntModels(sOntSelected);
 		System.out.println("Ontology selected: " + ontSelected.getsOntName());
 	}
 	
