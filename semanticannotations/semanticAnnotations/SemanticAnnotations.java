@@ -37,6 +37,10 @@ public class SemanticAnnotations {
 	private static void cleanup () {
 		ontCatalog = null;
 	}
+
+	public static OntologyCatalog getOntologyCatalog () {
+		return ontCatalog;
+	}
 	
 	/**
 	 * @param args
