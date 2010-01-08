@@ -6,6 +6,11 @@ import org.w3c.dom.NodeList;
 
 import com.hp.hpl.jena.rdf.model.Model;
 
+/***
+ * 
+ * @author daniel
+ *
+ */
 public class MyResource {
 
 	private String sRscAlias;

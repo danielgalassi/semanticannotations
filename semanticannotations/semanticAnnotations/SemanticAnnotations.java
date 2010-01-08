@@ -1,8 +1,16 @@
+/**
+ * 
+ */
 package semanticAnnotations;
 
 import ui.UIMgr;
 import metadata.OntologyCatalog;
 
+/***
+ * 
+ * @author daniel
+ *
+ */
 public class SemanticAnnotations {
 
 	private static OntologyCatalog ontCatalog;
