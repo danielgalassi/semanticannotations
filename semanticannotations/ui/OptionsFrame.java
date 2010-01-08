@@ -35,22 +35,22 @@ public class OptionsFrame extends JFrame {
         jButton2 = new JButton();
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setName("Form"); // NOI18N
+        setName("Form");
 
-        jButton1.setIcon(new ImageIcon("/media/disk/workspace/semanticannotations/rdf.jpg")); // NOI18N
-        jButton1.setText("jButton1.text"); // NOI18N
+        jButton1.setIcon(new ImageIcon("/media/disk/workspace/semanticannotations/rdf.jpg"));
+        jButton1.setText("jButton1.text");
         jButton1.setIconTextGap(10);
-        jButton1.setName("jButton1"); // NOI18N
+        jButton1.setName("jButton1");
         jButton1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
-        jButton2.setIcon(new ImageIcon("/media/disk/workspace/semanticannotations/rdf.jpg")); // NOI18N
-        jButton2.setText("jButton2.text"); // NOI18N
+        jButton2.setIcon(new ImageIcon("/media/disk/workspace/semanticannotations/rdf.jpg"));
+        jButton2.setText("jButton2.text");
         jButton2.setIconTextGap(10);
-        jButton2.setName("jButton2"); // NOI18N
+        jButton2.setName("jButton2");
         jButton2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 jButton2ActionPerformed(evt);
