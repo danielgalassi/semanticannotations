@@ -16,7 +16,7 @@ public class UIMgr {
 
 	private OntologyCatalog ontCatalog;
 	
-	private void buildWelcomeFrame () {
+	private void buildOntologyPickerUI () {
 		//select ontology
 		Iterator <String> itOntNames = ontCatalog.getOntNames();
 		while (itOntNames.hasNext())
@@ -36,6 +36,6 @@ public class UIMgr {
 	
 	public UIMgr (OntologyCatalog ontCatalog) {
 		setOntCatalog (ontCatalog);
-		buildWelcomeFrame ();
+		buildOntologyPickerUI ();
 	}
 }
