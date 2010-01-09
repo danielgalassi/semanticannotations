@@ -1,9 +1,7 @@
 package ui;
 
-import javax.swing.ActionMap;
 import javax.swing.GroupLayout;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.LayoutStyle;
