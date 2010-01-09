@@ -16,6 +16,8 @@ import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 import javax.swing.GroupLayout.ParallelGroup;
 import javax.swing.GroupLayout.SequentialGroup;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.SoftBevelBorder;
 
 import semanticAnnotations.SemanticAnnotations;
 
@@ -35,57 +37,58 @@ public class OntologyPicker extends JFrame {
 	}
 
 	private void initComponents() {
-
 		Iterator <String> itOntNames = SemanticAnnotations
 		.getOntologyCatalog()
 		.getOntNames();
 		JButton[] aJButtons = new JButton[SemanticAnnotations
 		                                  .getOntologyCatalog()
 		                                  .getSize()];
-		JButton jButton = null;
+		JButton jbOntology = null;
 		Iterator <Entry<String, JButton>> itJBOntologs = null;
 		ParallelGroup pgOntologs = null;
 		SequentialGroup sgOntologs = null;
 		Map.Entry<String, JButton> meJBOntologs = null;
 		String sOntology;
 		int i = 0;
-
+		
 		hmJBOntologs = new HashMap <String, JButton> ();
-
+		
 		while (itOntNames.hasNext()) {
 			sOntology = itOntNames.next();
 			System.out.println("Ontology available: " + sOntology);
-			jButton = new JButton();
-			jButton.setMnemonic(sOntology.charAt(0));
-			jButton.setIcon(new ImageIcon("tentacle.jpg"));
-			jButton.setText(sOntology);
-			jButton.setIconTextGap(10);
-			jButton.setName(sOntology);
-			jButton.addActionListener(new ActionListener() {
+			jbOntology = new JButton();
+			jbOntology.setMnemonic(sOntology.charAt(0));
+			jbOntology.setIcon(new ImageIcon("tentacle.jpg"));
+			jbOntology.setText(sOntology);
+			jbOntology.setIconTextGap(15);
+			jbOntology.setName(sOntology);
+			jbOntology.setBorder(new SoftBevelBorder ( BevelBorder.RAISED ));
+			jbOntology.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent evt) {
 					jOntActionPerformed(evt);
 				}
 			});
-			hmJBOntologs.put(sOntology, jButton);
+			hmJBOntologs.put(sOntology, jbOntology);
 		}
-
+		
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setName("OntologyPickerFrame");
 		setTitle("Ontology Picker");
 		setIconImage(Toolkit.getDefaultToolkit().getImage("rdf.jpg"));
-
+		
 		//prepare layout
 		GroupLayout layout = new GroupLayout(getContentPane());
 		getContentPane().setLayout(layout);
-
+		
+		//prepare alignment groups
 		pgOntologs = layout.createParallelGroup(GroupLayout.Alignment.LEADING);
+		sgOntologs = layout.createSequentialGroup();
 		itJBOntologs = hmJBOntologs.entrySet().iterator();
-		//prepare parallel group
 		while (itJBOntologs.hasNext()) {
 			meJBOntologs = (Map.Entry<String,JButton>)itJBOntologs.next();
-			pgOntologs.addComponent((JButton) meJBOntologs.getValue(),
-					GroupLayout.DEFAULT_SIZE, 212,
-					Short.MAX_VALUE);
+			pgOntologs.addComponent((JButton) meJBOntologs.getValue(), GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE);
+			sgOntologs.addGap(15).addComponent((JButton) meJBOntologs.getValue(), GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE).addContainerGap(20, Short.MAX_VALUE);
+			aJButtons[i++] = meJBOntologs.getValue();
 		};
 		//attach parallel group to horizontal layout
 		layout.setHorizontalGroup(
@@ -93,24 +96,13 @@ public class OntologyPicker extends JFrame {
 				.addGroup(layout.createSequentialGroup()
 						.addGap(35).addGroup(pgOntologs)
 						.addContainerGap(35, Short.MAX_VALUE)));
-
-		sgOntologs = layout.createSequentialGroup();
-		itJBOntologs = hmJBOntologs.entrySet().iterator();
-		//prepare sequential group
-		while (itJBOntologs.hasNext()) {
-			meJBOntologs = (Map.Entry<String,JButton>)itJBOntologs.next();
-			sgOntologs.addGap(15)
-			.addComponent((JButton) meJBOntologs.getValue(),
-					GroupLayout.PREFERRED_SIZE, 50, 
-					GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(20, Short.MAX_VALUE);
-			aJButtons[i++] = meJBOntologs.getValue();
-		}
 		//attach sequential group to vertical layout
 		layout.setVerticalGroup(layout.createParallelGroup(
 				GroupLayout.Alignment.LEADING).addGroup(sgOntologs));
-
+		//end of alignment groups
+		
 		layout.linkSize(SwingConstants.VERTICAL, aJButtons);
+		
 		pack();
 	}
 
