@@ -34,7 +34,7 @@ public class UI extends JFrame {
 
 	public UI() {
 		initComponents();
-		setLocation(200, 500);
+		setLocation(200, 300);
 	}
 
 	private void initComponents() {
@@ -108,7 +108,8 @@ public class UI extends JFrame {
 	}
 
 	private void jOntActionPerformed(java.awt.event.ActionEvent evt) {
-		System.out.println ("Ontology Picked!!");
+		System.out.println ("Ontology Picked!!" + 
+							((JButton) evt.getSource()).getName());
 	}
 
 	/*
