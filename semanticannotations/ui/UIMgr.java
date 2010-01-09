@@ -16,12 +16,7 @@ import semanticAnnotations.SemanticAnnotations;
 public class UIMgr {
 
 	private void buildOntologyPickerUI () {
-		//select ontology
-		Iterator <String> itOntNames = SemanticAnnotations
-										.getOntologyCatalog()
-										.getOntNames();
-		while (itOntNames.hasNext())
-			System.out.println("Ontology available: " + itOntNames.next() );
+		new OptionsFrame();
 		//upon selection...
 		buildForm("Annotations");
 	}
@@ -34,7 +29,6 @@ public class UIMgr {
 	}
 	
 	public UIMgr (OntologyCatalog ontCatalog) {
-		System.out.println(SemanticAnnotations.getOntologyCatalog().getSize());
 		buildOntologyPickerUI ();
 	}
 }
