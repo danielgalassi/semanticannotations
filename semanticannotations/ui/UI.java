@@ -26,13 +26,13 @@ import semanticAnnotations.SemanticAnnotations;
  * @author daniel
  *
  */
-public class OntologyPicker extends JFrame {
+public class UI extends JFrame {
 
 	private HashMap <String, JButton> hmJBOntologs;
 
 	private static final long serialVersionUID = 1L;
 
-	public OntologyPicker() {
+	public UI() {
 		initComponents();
 	}
 
