@@ -34,6 +34,7 @@ public class UI extends JFrame {
 
 	public UI() {
 		initComponents();
+		setLocation(200, 500);
 	}
 
 	private void initComponents() {

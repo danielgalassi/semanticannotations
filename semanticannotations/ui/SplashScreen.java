@@ -13,6 +13,7 @@ public class SplashScreen extends JFrame {
 
 	public SplashScreen () {
 		initComponents();
+		setLocation(200, 500);
 	}
 	
     private void initComponents() {
@@ -28,7 +29,7 @@ public class SplashScreen extends JFrame {
         JLabel imageLabel = new JLabel();
 
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Semantic Annotations");
+        setTitle("Loading Semantic Annotations");
         //setModal(true);
         setName("aboutBox");
         setResizable(false);

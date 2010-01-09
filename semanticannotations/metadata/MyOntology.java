@@ -53,7 +53,7 @@ public class MyOntology {
 		String sOntFile;
 		Node nDef = null;
 		hmOntology = new HashMap <String, OntModel> ();
-		System.out.println("Loading definitions");
+		System.out.print("Loading definitions\t");
 		for (int i=0; i<nlDefs.getLength(); i++) {
 			nDef = nlDefs.item(i);
 			if (nDef.getNodeName().equals("RDFvoc")) {
@@ -66,6 +66,7 @@ public class MyOntology {
 							RDFUtils.loadOntModelFromFile(sOntFile + ".rdf"));
 			}
 		}
+		System.out.println();
 	}
 	
 	/**

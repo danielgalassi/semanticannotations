@@ -73,7 +73,7 @@ public class RDFUtils {
 	 * @return model
 	 */
 	public static Model loadModelFromFile (String sFile) {
-		System.out.println("\t" + sFile);
+		System.out.print("\t" + sFile);
 		Model m = getNewModel();
 		InputStream in = FileManager.get().open(sFile);
 		m.read(in, null);
@@ -86,7 +86,7 @@ public class RDFUtils {
 	 * @return ontology model
 	 */
 	public static OntModel loadOntModelFromFile (String sFile) {
-		System.out.println("\t" + sFile);
+		System.out.print ("\t" + sFile);
 		OntModel om = ModelFactory.createOntologyModel(OntModelSpec.RDFS_MEM);
 		InputStream in = FileManager.get().open(sFile);
 		om.read(in, null);

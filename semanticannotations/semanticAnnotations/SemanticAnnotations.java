@@ -38,11 +38,6 @@ public class SemanticAnnotations {
 	public static void launchUI () {
 		UI u = new UI();
 		u.setVisible(true);
-		try {
-			Thread.sleep(5000);
-		} catch (Exception e) {
-			e.printStackTrace();
-		};
 	}
 
 	/**
@@ -60,13 +55,20 @@ public class SemanticAnnotations {
 	 * @param args
 	 */
 	public static void main (String[] args) {
-		//splash screen
+		//show splash screen
 		SplashScreen sscrn = new SplashScreen ();
 		sscrn.setVisible(true);
 		//startup
 		loadMetadataDefinitions ();
+		//5 extra seconds before closing the splash screen
+		try {
+			Thread.sleep(5000);
+		} catch (Exception e) {
+			e.printStackTrace();
+		};
 		sscrn.setVisible(false);
 		sscrn = null;
+		//show user interface
 		launchUI ();
 		//set objects to null
 		cleanup ();
