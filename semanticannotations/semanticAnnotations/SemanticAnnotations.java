@@ -3,8 +3,8 @@
  */
 package semanticAnnotations;
 
-import ui.UIMgr;
 import metadata.OntologyCatalog;
+import ui.UI;
 
 /***
  * 
@@ -28,7 +28,7 @@ public class SemanticAnnotations {
 	 * Prepares the user interface
 	 */
 	public static void launchUI () {
-		new UIMgr (ontCatalog);
+		new UI().setVisible(true);
 	}
 
 	/**
@@ -47,9 +47,9 @@ public class SemanticAnnotations {
 	 */
 	public static void main (String[] args) {
 		//startup
-		loadMetadataDefinitions();
-		launchUI();
+		loadMetadataDefinitions ();
+		launchUI ();
 		//set objects to null
-		cleanup();
+		cleanup ();
 	}
 }
