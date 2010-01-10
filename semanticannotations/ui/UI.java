@@ -28,7 +28,7 @@ import semanticAnnotations.SemanticAnnotations;
  */
 public class UI extends JFrame {
 
-	private HashMap <String, JButton> hmJBOntologs;
+	private HashMap <String, JButton> hmJBOnts;
 
 	private static final long serialVersionUID = 1L;
 
@@ -37,40 +37,42 @@ public class UI extends JFrame {
 		setLocation(200, 300);
 	}
 
-	private void initComponents() {
+	public JButton addJButton (String sTitle) {
+		JButton jbOntology = new JButton();
+		jbOntology.setMnemonic(sTitle.charAt(0));
+		jbOntology.setIcon(new ImageIcon("tentacle.jpg"));
+		jbOntology.setText(sTitle);
+		jbOntology.setName(sTitle);
+		jbOntology.setIconTextGap(15);
+		jbOntology.setBorder(new SoftBevelBorder ( BevelBorder.RAISED ));
+		jbOntology.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+				jOntActionPerformed(evt);
+			}
+		});
+		hmJBOnts.put(sTitle, jbOntology);
+		return jbOntology;
+	}
+	
+	private void initComponents () {
 		Iterator <String> itOntNames = SemanticAnnotations
 		.getOntologyCatalog()
 		.getOntNames();
 		JButton[] aJButtons = new JButton[SemanticAnnotations
 		                                  .getOntologyCatalog()
-		                                  .getSize()];
-		JButton jbOntology = null;
-		Iterator <Entry<String, JButton>> itJBOntologs = null;
-		ParallelGroup pgOntologs = null;
-		SequentialGroup sgOntologs = null;
-		Map.Entry<String, JButton> meJBOntologs = null;
-		String sOntology;
+		                                  .getSize()+1];
+		Iterator <Entry<String, JButton>> itJBOnts = null;
+		ParallelGroup pgOnts = null;
+		SequentialGroup sgOnts = null;
+		Map.Entry<String, JButton> meJBOnts = null;
 		int i = 0;
 		
-		hmJBOntologs = new HashMap <String, JButton> ();
+		hmJBOnts = new HashMap <String, JButton> ();
 		
 		while (itOntNames.hasNext()) {
-			sOntology = itOntNames.next();
-			System.out.println("Ontology available: " + sOntology);
-			jbOntology = new JButton();
-			jbOntology.setMnemonic(sOntology.charAt(0));
-			jbOntology.setIcon(new ImageIcon("tentacle.jpg"));
-			jbOntology.setText(sOntology);
-			jbOntology.setIconTextGap(15);
-			jbOntology.setName(sOntology);
-			jbOntology.setBorder(new SoftBevelBorder ( BevelBorder.RAISED ));
-			jbOntology.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent evt) {
-					jOntActionPerformed(evt);
-				}
-			});
-			hmJBOntologs.put(sOntology, jbOntology);
+			addJButton(itOntNames.next());
 		}
+		addJButton("Remember");
 		
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setName("OntologyPickerFrame");
@@ -82,24 +84,24 @@ public class UI extends JFrame {
 		getContentPane().setLayout(layout);
 		
 		//prepare alignment groups
-		pgOntologs = layout.createParallelGroup(GroupLayout.Alignment.LEADING);
-		sgOntologs = layout.createSequentialGroup();
-		itJBOntologs = hmJBOntologs.entrySet().iterator();
-		while (itJBOntologs.hasNext()) {
-			meJBOntologs = (Map.Entry<String,JButton>)itJBOntologs.next();
-			pgOntologs.addComponent((JButton) meJBOntologs.getValue(), GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE);
-			sgOntologs.addGap(15).addComponent((JButton) meJBOntologs.getValue(), GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE).addContainerGap(20, Short.MAX_VALUE);
-			aJButtons[i++] = meJBOntologs.getValue();
+		pgOnts = layout.createParallelGroup(GroupLayout.Alignment.LEADING);
+		sgOnts = layout.createSequentialGroup();
+		itJBOnts = hmJBOnts.entrySet().iterator();
+		while (itJBOnts.hasNext()) {
+			meJBOnts = (Map.Entry<String,JButton>)itJBOnts.next();
+			pgOnts.addComponent((JButton) meJBOnts.getValue(), GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE);
+			sgOnts.addGap(15).addComponent((JButton) meJBOnts.getValue(), GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE).addContainerGap(20, Short.MAX_VALUE);
+			aJButtons[i++] = meJBOnts.getValue();
 		};
 		//attach parallel group to horizontal layout
 		layout.setHorizontalGroup(
 				layout.createParallelGroup(GroupLayout.Alignment.LEADING)
 				.addGroup(layout.createSequentialGroup()
-						.addGap(35).addGroup(pgOntologs)
+						.addGap(35).addGroup(pgOnts)
 						.addContainerGap(35, Short.MAX_VALUE)));
 		//attach sequential group to vertical layout
 		layout.setVerticalGroup(layout.createParallelGroup(
-				GroupLayout.Alignment.LEADING).addGroup(sgOntologs));
+				GroupLayout.Alignment.LEADING).addGroup(sgOnts));
 		//end of alignment groups
 		
 		layout.linkSize(SwingConstants.VERTICAL, aJButtons);
