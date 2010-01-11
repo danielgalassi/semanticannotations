@@ -24,13 +24,6 @@ public class SemanticAnnotations {
 		if (ontCatalog.isOntCatalogReady ())
 			System.out.println("Ontology Catalog ready!");
 	}
-	
-	/**
-	 * 
-	 */
-	private static void launchSplashScreen() {
-		
-	}
 
 	/**
 	 * Prepares the user interface
