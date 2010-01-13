@@ -8,9 +8,9 @@ public class EntryForm extends JFrame {
 
 	public EntryForm (String sOntology) {
 		initComponents ();
+		System.out.println("New Entry Form for " + sOntology);
 	}
 	
 	private void initComponents () {
-		
 	}
 }

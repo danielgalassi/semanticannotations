@@ -29,15 +29,15 @@ import semanticAnnotations.SemanticAnnotations;
 public class UI extends JFrame {
 
 	private static final long serialVersionUID = -6440471635274136209L;
-	
+
 	private HashMap <String, JButton> hmJBOnts;
-	
+
 	public UI() {
 		initComponents();
 		setLocation(200, 300);
 	}
 
-	public JButton addJButton (String sTitle) {
+	public JButton addJButton (String sTitle, boolean addActionListener) {
 		JButton jbOntology = new JButton();
 		jbOntology.setMnemonic(sTitle.charAt(0));
 		jbOntology.setIcon(new ImageIcon("tentacle.jpg"));
@@ -45,15 +45,16 @@ public class UI extends JFrame {
 		jbOntology.setName(sTitle);
 		jbOntology.setIconTextGap(15);
 		jbOntology.setBorder(new SoftBevelBorder ( BevelBorder.RAISED ));
-		jbOntology.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent evt) {
-				jOntActionPerformed(evt);
-			}
-		});
+		if (addActionListener)
+			jbOntology.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent evt) {
+					jOntActionPerformed(evt);
+				}
+			});
 		hmJBOnts.put(sTitle, jbOntology);
 		return jbOntology;
 	}
-	
+
 	private void initComponents () {
 		Iterator <String> itOntNames = SemanticAnnotations
 		.getOntologyCatalog()
@@ -66,23 +67,28 @@ public class UI extends JFrame {
 		SequentialGroup sgOnts = null;
 		Map.Entry<String, JButton> meJBOnts = null;
 		int i = 0;
-		
+
 		hmJBOnts = new HashMap <String, JButton> ();
-		
+
 		while (itOntNames.hasNext()) {
-			addJButton(itOntNames.next());
+			addJButton(itOntNames.next(), true);
 		}
-		addJButton("Remember");
-		
+		addJButton("Remember", false)
+		.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+				jRememberActionPerformed(evt);
+			}
+		});
+
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setName("OntologyPickerFrame");
 		setTitle("Ontology Picker");
 		setIconImage(Toolkit.getDefaultToolkit().getImage("rdf.jpg"));
-		
+
 		//prepare layout
 		GroupLayout layout = new GroupLayout(getContentPane());
 		getContentPane().setLayout(layout);
-		
+
 		//prepare alignment groups
 		pgOnts = layout.createParallelGroup(GroupLayout.Alignment.LEADING);
 		sgOnts = layout.createSequentialGroup();
@@ -103,15 +109,20 @@ public class UI extends JFrame {
 		layout.setVerticalGroup(layout.createParallelGroup(
 				GroupLayout.Alignment.LEADING).addGroup(sgOnts));
 		//end of alignment groups
-		
+
 		layout.linkSize(SwingConstants.VERTICAL, aJButtons);
-		
+
 		pack();
 	}
 
-	private void jOntActionPerformed(java.awt.event.ActionEvent evt) {
+	private void jOntActionPerformed (java.awt.event.ActionEvent evt) {
 		System.out.println ("Ontology Picked!!" + 
-							((JButton) evt.getSource()).getName());
+				((JButton) evt.getSource()).getName());
+		new EntryForm (((JButton) evt.getSource()).getName());
+	}
+	
+	public void jRememberActionPerformed (java.awt.event.ActionEvent evt) {
+		System.out.println("Remember!");
 	}
 
 	/*
