@@ -15,7 +15,7 @@ import org.w3c.dom.Document;
 public class XMLUtils {
 
 	/**
-	 * Reify a DOM document from a file
+	 * Load a DOM Document from an XML file
 	 * @param filename
 	 * @return DOM document
 	 */
