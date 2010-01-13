@@ -9,7 +9,7 @@ import javax.swing.WindowConstants;
 
 public class SplashScreen extends JFrame {
 
-	private static final long serialVersionUID = 2L;
+	private static final long serialVersionUID = 3020233121396236679L;
 
 	public SplashScreen () {
 		initComponents();
