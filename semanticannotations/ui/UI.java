@@ -115,10 +115,9 @@ public class UI extends JFrame {
 	}
 
 	private void jOntActionPerformed (java.awt.event.ActionEvent evt) {
-		System.out.println ("Ontology Picked!!" + 
-				((JButton) evt.getSource()).getName());
-		new EntryForm (((JButton) evt.getSource()).getName(), 
-						ontCatalog);
+		String sOntPicked = ((JButton) evt.getSource()).getName();
+		System.out.println ("Ontology Picked!!" + sOntPicked);
+		new EntryForm (ontCatalog.getOntModels(sOntPicked));
 	}
 
 	public void jRememberActionPerformed (java.awt.event.ActionEvent evt) {
