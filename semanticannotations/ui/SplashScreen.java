@@ -16,7 +16,7 @@ public class SplashScreen extends JFrame {
 		setLocation(200, 500);
 	}
 	
-    private void initComponents() {
+    private void initComponents () {
 
         JLabel appTitleLabel = new JLabel();
         JLabel versionLabel = new JLabel();

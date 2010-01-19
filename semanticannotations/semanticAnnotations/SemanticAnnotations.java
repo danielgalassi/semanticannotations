@@ -29,7 +29,7 @@ public class SemanticAnnotations {
 	 * Prepares the user interface
 	 */
 	public static void launchUI () {
-		UI u = new UI();
+		UI u = new UI (ontCatalog);
 		u.setVisible(true);
 	}
 
@@ -38,10 +38,6 @@ public class SemanticAnnotations {
 	 */
 	private static void cleanup () {
 		ontCatalog = null;
-	}
-
-	public static OntologyCatalog getOntologyCatalog () {
-		return ontCatalog;
 	}
 
 	/**
@@ -54,11 +50,13 @@ public class SemanticAnnotations {
 		//startup
 		loadMetadataDefinitions ();
 		//5 extra seconds before closing the splash screen
+		/*
 		try {
 			Thread.sleep(5000);
 		} catch (Exception e) {
 			e.printStackTrace();
 		};
+		*/
 		sscrn.setVisible(false);
 		sscrn = null;
 		//show user interface

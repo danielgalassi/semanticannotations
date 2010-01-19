@@ -19,7 +19,7 @@ import javax.swing.GroupLayout.SequentialGroup;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.SoftBevelBorder;
 
-import semanticAnnotations.SemanticAnnotations;
+import metadata.OntologyCatalog;
 
 /***
  * 
@@ -29,10 +29,13 @@ import semanticAnnotations.SemanticAnnotations;
 public class UI extends JFrame {
 
 	private static final long serialVersionUID = -6440471635274136209L;
+	
+	private OntologyCatalog ontCatalog;
 
 	private HashMap <String, JButton> hmJBOnts;
 
-	public UI() {
+	public UI (OntologyCatalog oCat) {
+		ontCatalog = oCat;
 		initComponents();
 		setLocation(200, 300);
 	}
@@ -56,12 +59,8 @@ public class UI extends JFrame {
 	}
 
 	private void initComponents () {
-		Iterator <String> itOntNames = SemanticAnnotations
-		.getOntologyCatalog()
-		.getOntNames();
-		JButton[] aJButtons = new JButton[SemanticAnnotations
-		                                  .getOntologyCatalog()
-		                                  .getSize()+1];
+		Iterator <String> itOntNames = ontCatalog.getOntNames();
+		JButton[] aJButtons = new JButton[ontCatalog.getSize()+1];
 		Iterator <Entry<String, JButton>> itJBOnts = null;
 		ParallelGroup pgOnts = null;
 		SequentialGroup sgOnts = null;
@@ -118,9 +117,10 @@ public class UI extends JFrame {
 	private void jOntActionPerformed (java.awt.event.ActionEvent evt) {
 		System.out.println ("Ontology Picked!!" + 
 				((JButton) evt.getSource()).getName());
-		new EntryForm (((JButton) evt.getSource()).getName());
+		new EntryForm (((JButton) evt.getSource()).getName(), 
+						ontCatalog);
 	}
-	
+
 	public void jRememberActionPerformed (java.awt.event.ActionEvent evt) {
 		System.out.println("Remember!");
 	}
