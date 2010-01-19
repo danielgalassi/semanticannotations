@@ -116,7 +116,6 @@ public class UI extends JFrame {
 
 	private void jOntActionPerformed (java.awt.event.ActionEvent evt) {
 		String sOntPicked = ((JButton) evt.getSource()).getName();
-		System.out.println ("Ontology Picked!!" + sOntPicked);
 		new EntryForm (ontCatalog.getOntModels(sOntPicked));
 	}
 
