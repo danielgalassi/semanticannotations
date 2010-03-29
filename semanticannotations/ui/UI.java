@@ -72,7 +72,7 @@ public class UI extends JFrame {
 		while (itOntNames.hasNext()) {
 			addJButton(itOntNames.next(), true);
 		}
-		addJButton("Remember", false)
+		addJButton("Search", false)
 		.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
 				jRememberActionPerformed(evt);
@@ -120,7 +120,7 @@ public class UI extends JFrame {
 	}
 
 	public void jRememberActionPerformed (java.awt.event.ActionEvent evt) {
-		System.out.println("Remember!");
+		System.out.println("Search!");
 	}
 
 	/*
