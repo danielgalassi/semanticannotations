@@ -2,20 +2,18 @@
 <classpath>
 	<classpathentry kind="src" path=""/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="/media/disk/semanticWeb/Jena/lib/arq.jar"/>
-	<classpathentry kind="lib" path="/media/disk/semanticWeb/Jena/lib/arq-extra.jar"/>
-	<classpathentry kind="lib" path="/media/disk/semanticWeb/Jena/lib/icu4j_3_4.jar"/>
-	<classpathentry kind="lib" path="/media/disk/semanticWeb/Jena/lib/iri.jar"/>
-	<classpathentry kind="lib" path="/media/disk/semanticWeb/Jena/lib/jena.jar" sourcepath="/media/disk/semanticWeb/Jena/src"/>
-	<classpathentry kind="lib" path="/media/disk/semanticWeb/Jena/lib/jenatest.jar"/>
-	<classpathentry kind="lib" path="/media/disk/semanticWeb/Jena/lib/json.jar"/>
-	<classpathentry kind="lib" path="/media/disk/semanticWeb/Jena/lib/junit-4.5.jar"/>
-	<classpathentry kind="lib" path="/media/disk/semanticWeb/Jena/lib/log4j-1.2.12.jar"/>
-	<classpathentry kind="lib" path="/media/disk/semanticWeb/Jena/lib/lucene-core-2.3.1.jar"/>
-	<classpathentry kind="lib" path="/media/disk/semanticWeb/Jena/lib/slf4j-api-1.5.6.jar"/>
-	<classpathentry kind="lib" path="/media/disk/semanticWeb/Jena/lib/slf4j-log4j12-1.5.6.jar"/>
-	<classpathentry kind="lib" path="/media/disk/semanticWeb/Jena/lib/stax-api-1.0.jar"/>
-	<classpathentry kind="lib" path="/media/disk/semanticWeb/Jena/lib/wstx-asl-3.0.0.jar"/>
-	<classpathentry kind="lib" path="/media/disk/semanticWeb/Jena/lib/xercesImpl.jar"/>
+	<classpathentry kind="lib" path="/data/SemanticWeb/Jena-2.6.2/lib/arq-2.8.1.jar"/>
+	<classpathentry kind="lib" path="/data/SemanticWeb/Jena-2.6.2/lib/icu4j-3.4.4.jar"/>
+	<classpathentry kind="lib" path="/data/SemanticWeb/Jena-2.6.2/lib/iri-0.7.jar"/>
+	<classpathentry kind="lib" path="/data/SemanticWeb/Jena-2.6.2/lib/jena-2.6.2.jar"/>
+	<classpathentry kind="lib" path="/data/SemanticWeb/Jena-2.6.2/lib/jena-2.6.2-tests.jar"/>
+	<classpathentry kind="lib" path="/data/SemanticWeb/Jena-2.6.2/lib/junit-4.5.jar"/>
+	<classpathentry kind="lib" path="/data/SemanticWeb/Jena-2.6.2/lib/log4j-1.2.13.jar"/>
+	<classpathentry kind="lib" path="/data/SemanticWeb/Jena-2.6.2/lib/lucene-core-2.3.1.jar"/>
+	<classpathentry kind="lib" path="/data/SemanticWeb/Jena-2.6.2/lib/slf4j-api-1.5.6.jar"/>
+	<classpathentry kind="lib" path="/data/SemanticWeb/Jena-2.6.2/lib/slf4j-log4j12-1.5.6.jar"/>
+	<classpathentry kind="lib" path="/data/SemanticWeb/Jena-2.6.2/lib/stax-api-1.0.1.jar"/>
+	<classpathentry kind="lib" path="/data/SemanticWeb/Jena-2.6.2/lib/wstx-asl-3.2.9.jar"/>
+	<classpathentry kind="lib" path="/data/SemanticWeb/Jena-2.6.2/lib/xercesImpl-2.7.1.jar"/>
 	<classpathentry kind="output" path=""/>
 </classpath>
