@@ -122,13 +122,4 @@ public class UI extends JFrame {
 	public void jRememberActionPerformed (java.awt.event.ActionEvent evt) {
 		System.out.println("Search!");
 	}
-
-	/*
-    public static void main(String args[]) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new OptionsFrame().setVisible(true);
-            }
-        });
-    }*/
 }

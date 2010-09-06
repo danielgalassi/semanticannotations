@@ -35,7 +35,7 @@ public class SplashScreen extends JFrame {
         setResizable(false);
 
         appTitleLabel.setFont(appTitleLabel.getFont().deriveFont(appTitleLabel.getFont().getStyle() | java.awt.Font.BOLD, appTitleLabel.getFont().getSize()+4));
-        appTitleLabel.setText("SUR - So U Remember");
+        appTitleLabel.setText("Semantic Annotation Tool");
         appTitleLabel.setName("appTitleLabel");
 
         versionLabel.setFont(versionLabel.getFont().deriveFont(versionLabel.getFont().getStyle() | java.awt.Font.BOLD));
@@ -56,7 +56,7 @@ public class SplashScreen extends JFrame {
         homepageLabel.setText("Homepage:");
         homepageLabel.setName("homepageLabel");
 
-        appHomepageLabel.setText("http://code.google.com/p/semanticannotations/");
+        appHomepageLabel.setText("http://tinyurl.com/semanticnotes");
         appHomepageLabel.setName("appHomepageLabel");
 
         appDescLabel.setText("<html>Take notes now, read them tomorrow, so you remember.");
