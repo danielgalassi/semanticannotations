@@ -1,0 +1,2 @@
+Project aims to build a simple desktop application, CRUD, to manage marginal notes.
+Most likely, Dublin Core (http://dublincore.org/index.shtml) and Annotea schemas will be the first two schemas to be supported, both related to the Semantic Web initiative.
